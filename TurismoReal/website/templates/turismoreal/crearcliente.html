@@ -1,0 +1,19 @@
+{%extends "turismoreal/padre.html"%}
+{% load static %}
+{% block title %}Crear Usuario{% endblock %}
+{% block content %}
+
+<div class="row text-white text-center col-sm-12 col-md-6 logine">
+    <form action="{% url 'crearcliente'%}" id="formulario" method="post" class="text-center-row">
+        {%csrf_token%}
+        <div class="col-sm-12 col-md-6">
+            <h1>Email</h1>
+            <input type="text" id="rut" required style="width:95%" placeholder="11111111" pattern="[1-9]{1}[0-9]{8}" title="Coloque el rut sin puntos ni - .Si termina en K remplace la con un '0'">
+            h1>Clave</h1>
+                <input type="password" id="clave"required minlength="6" style="width:95%" placeholder="******"name="clave" title="Colocar minimos 6 caracteres">
+        </div>
+        <button type="submit">Registrar</button>
+    </form>
+</div>
+
+{%endblock%}

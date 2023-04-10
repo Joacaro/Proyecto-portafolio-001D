@@ -1,0 +1,35 @@
+{%extends "turismoreal/padre.html"%}
+{% load static %}
+{% load widget_tweaks %}
+{% block title %} Sesion {% endblock %}
+{% block content %}
+
+<div id="modal1">
+    <div>
+        <div>
+            <div>
+                <h1>Notificación</h1>
+            </div>
+            <div class="modal-body">
+                <p>Datos Incorrectos</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row text-black text-center login">
+    <form id="form1" action="{% url 'login'%}" method="post" class="text-center">
+        {% csrf_token %}
+            <h1>Correo</h1>
+            {% render_field form.email type="email" style="width:90%" placeholder="Ejemplo@ejemplo.com"%}
+            <h1>Clave</h1>
+            {% render_field form.clave type="password" style="width:90%" placeholder="**************" %}
+            <div class="container">
+                <div class="center" style="margin: 20px 0;">
+                    <button type="submit" class="btn btn-danger">Iniciar sesión</button>
+                </div>
+            </div>
+    </form>
+</div>
+
+{%endblock%}
