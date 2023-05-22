@@ -7,10 +7,36 @@
     <form action="{% url 'crearcliente'%}" id="formulario" method="post" class="text-center-row">
         {%csrf_token%}
         <div class="col-sm-12 col-md-6">
-            <h1>Email</h1>
-            <input type="text" id="rut" required style="width:95%" placeholder="11111111" pattern="[1-9]{1}[0-9]{8}" title="Coloque el rut sin puntos ni - .Si termina en K remplace la con un '0'">
-            h1>Clave</h1>
-                <input type="password" id="clave"required minlength="6" style="width:95%" placeholder="******"name="clave" title="Colocar minimos 6 caracteres">
+            <h1>Seleccione Tipo de Identificación</h1>
+            <h1>Identificación</h1>
+            <input type="text" id="rut" name="rut" required style="width:80%" placeholder="111111111" pattern="[1-9]{1}[0-9]{8}" title="Coloque el rut sin puntos ni - .Si termina en K remplace la con un '0'" >
+            <h1>Nombre</h1>
+            <input type="text" id="nombre" required minlength="2" style="width:80%" name="nombre" placeholder="Juan" pattern="[a-zA-Z]{3,50}" title="Colocar un nombre de 2 o mas caracteres de la 'a' a la 'z'">
+            <h1>Apellido Paterno</h1>
+            <input type="text" id="apellidoP"required minlength="2" style="width:80%" name="apellidoP"placeholder="perez" pattern="[a-zA-Z]{3,50}" title="Colocar un apellido de 2 o mas caracteres de la 'a' a la 'z'">
+            <h1>Apellido Materno</h1>
+            <input type="text" id="apellidoM"required minlength="2" style="width:80%" name="apellidoM"placeholder="perez" pattern="[a-zA-Z]{3,50}" title="Colocar un apellido de 2 o mas caracteres de la 'a' a la 'z'">
+            <h1>Edad</h1>
+            <input type="int" id="edad" required minlength="1" maxlength="2" style="width:80%" name="edad" placeholder="20" title="Colocar una edad de dos digitos">
+            <h1>Sexo</h1>
+            <select id="sexo" name="sexo" required>
+                <option selected="selected" disabled>Object in page</option>
+                <option value='M'>Masculino</option>
+                <option value='F'>Femenino</option>
+                <option value='O'>Otro</option>
+            </select>
+        </div>
+        <div class="col-sm-12 col-md-6">
+            <h1>Direccion</h1>
+            <input type="text" id="direccion"required  style="width:80%" name="direccion" placeholder="Direccion 181 Depto 12">
+            <h1>Estado Civil</h1>
+            <input type="text" id="estado_civil"required style="width: 80%;" name="estado_civil" placeholder="Casado/Soltero/Viudo">
+            <h1>Telefono</h1>
+            <input type="tel" id="telefono"required  style="width:80%" name="telefono" placeholder="956874265" pattern="[9,2]{1}[0-9]{3}[0-9]{2}[0-9]{3}" title="colocar solo 9 digitos que comience en 2 o 9">
+            <h1>Correo</h1>
+            <input type="email" id="email"required  style="width:80%"placeholder="email@email.com" name="email">
+            <h1>Clave</h1>
+            <input type="password" id="clave"required minlength="6" style="width:95%" placeholder="******"name="clave" title="Colocar minimos 6 caracteres">
         </div>
         <button type="submit">Registrar</button>
     </form>

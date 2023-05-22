@@ -2,19 +2,89 @@
 <html>
 
 <head lang="es">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{%block title%}{%endblock%}</title>
     {% load static %}
 </head>
 <body>
-
-<h1>This is a Heading</h1>
-<p>This is a paragraph.</p>
-
+    <nav top section class="navbar navbar-expand-lg" style="box-shadow: 6px 15px 20px Gainsboro">
+        <div class="container-fluid">
+          <a class="navbar-brand text-black text-center"  href="#"><i class="fa-solid fa-kitchen-set"></i></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav mx-auto">
+              <li class="nav-item">
+                <a class="nav-link active text-black text-center " aria-current="page" href="{% url 'index' %}">Inicio</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-black text-center" href="home/index.html#nosotros">Nosotros</a>
+              </li>
+    
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-black text-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Servicios
+                </a>
+                <ul class="dropdown-menu">
+                  {% if user.is_authenticated %}
+                  <li><a class="dropdown-item text-center" href="{% url 'welcome' %}">Mi Cuenta</a></li>
+                  <li><a class="dropdown-item text-center" href="{% url 'salir' %}">Cerrar sesión</a></li>
+                  <li><a class="dropdown-item text-center" href="{% url 'editarclientes' %}">Editar datos</a></li>
+                  
+                  {% else %}  
+                  <li><a class="dropdown-item text-center" href="{% url 'login' %}">Login</a></li>
+                  {% endif %}
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
 </body>
 {%block content%}
 {%endblock%}
 
 <footer>
-    
+    <footer class="bg-dark text-white pt-5 pb-4 down" >
+        <div class="container text-center text-md-left">
+          <div class=" text-center text-md-left row">
+            <div class="col-md-12 col-xl-3 mx-auto mt-3">
+              <h5 id="h5" class="text-uppercase mb-4 font-weight-bold ">Cocina tradicional chilena</h5>
+              <p id="P">Respetamos los sabores originales de la cocina tradicional chilena</p>
+            </div>
+            <div class="col-sm-12 col-md-4 col-xl-3 mx-auto mt-3">
+              <h5  id="h5" class="text-uppercase mb-4 font-weight-bold ">Innovación</h5>
+              <p id="P">
+                Chefs con más de cuarenta treinta años de trayectoria
+              </p>
+              <p>
+               <a href="#" style="text-decoration:none" class="text-white"></a>
+              </p>
+              <p>
+                <a href="#" style="text-decoration:none" class="text-white"></a>
+              </p>
+              <p>
+                <a href="#" style="text-decoration:none" class="text-white"></a>
+              </p>
+            </div>
+            <div class="col-sm-12 col-md-4 col-xl-3 mx-auto mt-3">
+              <h5 id="h5" class="text-uppercase mb-4 font-weight-bold">Bar</h5>
+              <p id="P">
+                <a href="#" style="text-decoration:none" class="text-white">Contamos con servicio de bartender</a>
+              </p>
+              <p>
+                <a href="#" style="text-decoration:none" class="text-white"></a>
+              </p>
+              <p>
+                <a href="#" style="text-decoration:none" class="text-white"></a>
+              </p>
+            </div>
+            </div>
+          </div>
+        </div>
+        <div class="text-center text-md-left"><p style="font-size: 20px;">Visítanos en  avenida El mirador 321, Valparaíso.</p></div>
 </footer>
 </html>
