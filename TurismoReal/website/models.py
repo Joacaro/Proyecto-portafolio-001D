@@ -7,7 +7,7 @@ from datetime import datetime
 
 class Cliente(models.Model):
     id_cli = models.IntegerField(primary_key=True, db_column="id_cli")
-    tipo_vat = models.IntegerField(max_length=1, db_column="tipo_vat")
+    tipo_vat = models.IntegerField(db_column="tipo_vat")
     vat = models.CharField(max_length=10, db_column="vat")
     nombre_cli = models.CharField(max_length=50)
     apaterno_cli = models.CharField(max_length=50)

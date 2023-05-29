@@ -7,15 +7,15 @@ import hashlib
 from .backend import MyBackend
 from django.contrib.auth import login as auth_login, logout, authenticate
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from django.conf import settings
+mybackend = MyBackend()
 # Create your views here.
 def error_404(request, exception):
     return render(request, 'turismoreal/404.html')
 def index(request):
     return render(request, 'turismoreal/index.html')
-def welcome(request):
-    return render(request, "turismoreal/welcome.html")
 def salir(request):
     logout(request)
     return redirect("login")
@@ -69,7 +69,6 @@ def crearcliente(request):
         connection.commit()  
         cursor.close()
         connection.close()
-        return HttpResponse("Client created successfully.")
     return render(request, 'turismoreal/crearcliente.html',{"validar":validar,"registro":registro})
 
 def login(request):
@@ -79,8 +78,8 @@ def login(request):
         if form.is_valid():
             usuario = form.cleaned_data["email"]
             clave = form.cleaned_data["clave"]
-            hash = hashlib.sha256(str(clave).encode('utf-8')).hexdigest()
-            user = MyBackend.authenticate(
+            hash = hashlib.sha256(clave.encode('utf-8')).hexdigest()
+            user = mybackend.authenticate(
                 request, username=usuario, password=hash)
             if user is not None:
                 try:
@@ -92,3 +91,7 @@ def login(request):
                 mensaje=True
             print(mensaje)
     return render(request, 'turismoreal/login.html', {"form": form, "mensaje":mensaje})
+
+@login_required(login_url="login")
+def welcome(request):
+    return render(request, 'turismoreal/welcome.html')

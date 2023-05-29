@@ -20,10 +20,6 @@
               <li class="nav-item">
                 <a class="nav-link active text-black text-center " aria-current="page" href="{% url 'index' %}">Inicio</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link text-black text-center" href="home/index.html#nosotros">Nosotros</a>
-              </li>
-    
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle text-black text-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Servicios
@@ -32,7 +28,6 @@
                   {% if user.is_authenticated %}
                   <li><a class="dropdown-item text-center" href="{% url 'welcome' %}">Mi Cuenta</a></li>
                   <li><a class="dropdown-item text-center" href="{% url 'salir' %}">Cerrar sesión</a></li>
-                  <li><a class="dropdown-item text-center" href="{% url 'editarclientes' %}">Editar datos</a></li>
                   
                   {% else %}  
                   <li><a class="dropdown-item text-center" href="{% url 'login' %}">Login</a></li>
@@ -52,39 +47,8 @@
         <div class="container text-center text-md-left">
           <div class=" text-center text-md-left row">
             <div class="col-md-12 col-xl-3 mx-auto mt-3">
-              <h5 id="h5" class="text-uppercase mb-4 font-weight-bold ">Cocina tradicional chilena</h5>
-              <p id="P">Respetamos los sabores originales de la cocina tradicional chilena</p>
+              <h5 id="h5" class="text-uppercase mb-4 font-weight-bold ">Turismo Real</h5>
+              <p id="P">Empresa familiar</p>
             </div>
-            <div class="col-sm-12 col-md-4 col-xl-3 mx-auto mt-3">
-              <h5  id="h5" class="text-uppercase mb-4 font-weight-bold ">Innovación</h5>
-              <p id="P">
-                Chefs con más de cuarenta treinta años de trayectoria
-              </p>
-              <p>
-               <a href="#" style="text-decoration:none" class="text-white"></a>
-              </p>
-              <p>
-                <a href="#" style="text-decoration:none" class="text-white"></a>
-              </p>
-              <p>
-                <a href="#" style="text-decoration:none" class="text-white"></a>
-              </p>
-            </div>
-            <div class="col-sm-12 col-md-4 col-xl-3 mx-auto mt-3">
-              <h5 id="h5" class="text-uppercase mb-4 font-weight-bold">Bar</h5>
-              <p id="P">
-                <a href="#" style="text-decoration:none" class="text-white">Contamos con servicio de bartender</a>
-              </p>
-              <p>
-                <a href="#" style="text-decoration:none" class="text-white"></a>
-              </p>
-              <p>
-                <a href="#" style="text-decoration:none" class="text-white"></a>
-              </p>
-            </div>
-            </div>
-          </div>
-        </div>
-        <div class="text-center text-md-left"><p style="font-size: 20px;">Visítanos en  avenida El mirador 321, Valparaíso.</p></div>
 </footer>
 </html>

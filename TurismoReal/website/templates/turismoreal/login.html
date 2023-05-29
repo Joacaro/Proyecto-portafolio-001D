@@ -4,19 +4,6 @@
 {% block title %} Sesion {% endblock %}
 {% block content %}
 
-<div id="modal1">
-    <div>
-        <div>
-            <div>
-                <h1>Notificación</h1>
-            </div>
-            <div class="modal-body">
-                <p>Datos Incorrectos</p>
-            </div>
-        </div>
-    </div>
-</div>
-
 <div class="row text-black text-center login">
     <form id="form1" action="{% url 'login'%}" method="post" class="text-center">
         {% csrf_token %}

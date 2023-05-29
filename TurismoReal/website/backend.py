@@ -4,10 +4,10 @@ from django.db import connections
 from .models import Cliente
 
 import cx_Oracle as oracledb
-connection = oracledb.connect(user="admin_tr", password="dbadmin23", encoding="UTF-8")
+connection = oracledb.connect(user="c##deptos", password="dbadmin23", encoding="UTF-8")
 
 class MyBackend(BaseBackend):
-    def authenticate(self,username=None, password=None):
+    def authenticate(self, request, username=None, password=None):
         with connections['default'].cursor() as cursor:
             try:
                 cliente = Cliente.objects.filter(email=username, clave=password).get()

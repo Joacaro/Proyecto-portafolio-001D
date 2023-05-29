@@ -1,9 +1,9 @@
 {%extends "turismoreal/padre.html"%}
 {% load static %}
-{% block title %}usuario{% endblock %}
+{% block title %}Bienvenido{% endblock %}
 {% block content %}
 <div style="margin:30px 0;text-align: center;">
 <h1>Bienvenido</h1>
-<h5>{{ user.nombre }} {{user.apellido}}</h5>
+<h5>{{ user.nombre_cli }} {{user.apaterno_cli}}</h5>
 </div>
 {% endblock %}  
