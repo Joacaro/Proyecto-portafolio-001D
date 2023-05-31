@@ -19,10 +19,10 @@ def index(request):
 def salir(request):
     logout(request)
     return redirect("login")
-def correoreserva(usuario,mesa,personas,ini,fin,correopersona):
+def correoreserva(usuario,depto,correopersona):
     send_mail(
-        'confirmacion de reserva',
-        'señor/a '+ usuario+ ' su reserva fue confirmada, su mesa es n°'+mesa+' para '+personas+ ' personas durante '+ini +' a '+fin,
+        'Confirmacion de reserva',
+        'Señor/a '+ usuario+ ' su reserva fue confirmada, en el departamento '+depto,
         settings.EMAIL_HOST_USER,
         [correopersona],
         fail_silently=False
@@ -30,20 +30,13 @@ def correoreserva(usuario,mesa,personas,ini,fin,correopersona):
     return correoreserva
 def correocancelacion(usuario,correopersona):
     send_mail(
-        'se ha cancelado la reserva',
-        'señor/a '+ usuario+ ' su reserva fue cancelada, para hacer una nueva reserva visitenos en www.restaurantsigloxxi/restaurant/home/index',
+        'Se ha cancelado la reserva',
+        'Señor/a '+ usuario+ ' su reserva fue cancelada, para hacer una nueva reserva visitenos en www.turismoreal.cl',
         settings.EMAIL_HOST_USER,
         [correopersona],
         fail_silently=False
     )
     return correocancelacion    
-
-def procedimientocrearcliente(id, rut, nombre, apellido, telefono, email, clave):
-    with connections['default'].cursor() as cursor:
-        # parametros a enviar Sirve para CUD
-        cursor.callproc("SP_clientes_c", [
-                        id, rut, nombre, apellido, telefono, email, clave])
-        return procedimientocrearcliente
 
 def crearcliente(request):
     registro=None
@@ -66,6 +59,31 @@ def crearcliente(request):
                                   encoding="UTF-8")
         cursor = connection.cursor()
         cursor.callproc('SP_Clientes', [prut, pnombre, papellidop, papellidom, pedad, psexo, pdireccion, pestadocivil, ptelefono, pemail, hash])
+        connection.commit()  
+        cursor.close()
+        connection.close()
+    return render(request, 'turismoreal/crearcliente.html',{"validar":validar,"registro":registro})
+
+def editarcliente(request):
+    registro=None
+    validar=None
+    if request.method == "POST":
+        datos=request.POST
+        pnombre = datos["nombre"]
+        papellidop = datos["apellidoP"]
+        papellidom = datos["apellidoM"]
+        pedad = datos["edad"]
+        psexo = datos["sexo"]
+        pdireccion = datos["direccion"]
+        pestadocivil = datos["estado_civil"]
+        ptelefono = datos["telefono"]
+        pemail = datos["email"]
+        pclave = datos["clave"]
+        hash = hashlib.sha256(str(pclave).encode('utf-8')).hexdigest()
+        connection = oracledb.connect(user="c##deptos", password="dbadmin23",
+                                  encoding="UTF-8")
+        cursor = connection.cursor()
+        cursor.callproc('SP_Clientes_Update', [pnombre, papellidop, papellidom, pedad, psexo, pdireccion, pestadocivil, ptelefono, pemail, hash])
         connection.commit()  
         cursor.close()
         connection.close()
@@ -95,3 +113,14 @@ def login(request):
 @login_required(login_url="login")
 def welcome(request):
     return render(request, 'turismoreal/welcome.html')
+
+@login_required(login_url="login")
+def reserva(request):
+    if request.method == "POST":
+        connection = oracledb.connect(user="C##deptos", password="dbadmin23",
+                                  encoding="UTF-8")
+        
+def eliminar_reserva(request):
+    if request.method == "POST":
+        connection = oracledb.connect(user="C##deptos", password="dbadmin23",
+                                  encoding="UTF-8")
