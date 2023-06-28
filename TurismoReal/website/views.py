@@ -58,7 +58,20 @@ def crearcliente(request):
         connection = oracledb.connect(user="c##deptos", password="dbadmin23",
                                   encoding="UTF-8")
         cursor = connection.cursor()
-        cursor.callproc('SP_Clientes', [prut, pnombre, papellidop, papellidom, pedad, psexo, pdireccion, pestadocivil, ptelefono, pemail, hash])
+        ref_cursor = connection.cursor()
+        cursor.callproc("SP_Cliente_VAL", [ref_cursor,prut,pemail])
+        resultado = []
+        for row in ref_cursor:
+            resultado.append(row)
+            if resultado[0][0]==prut: 
+                validar=True
+                break
+            elif resultado[0][1]==pemail:
+                validar=True
+                break
+        if validar==None:
+            registro=True   
+            cursor.callproc('SP_Clientes_Mant', [prut, pnombre, papellidop, papellidom, pedad, psexo, pdireccion, pestadocivil, ptelefono, pemail, hash])
         connection.commit()  
         cursor.close()
         connection.close()
@@ -83,7 +96,22 @@ def editarcliente(request):
         connection = oracledb.connect(user="c##deptos", password="dbadmin23",
                                   encoding="UTF-8")
         cursor = connection.cursor()
-        cursor.callproc('SP_Clientes_Update', [pnombre, papellidop, papellidom, pedad, psexo, pdireccion, pestadocivil, ptelefono, pemail, hash])
+        ref_cursor = connection.cursor()
+        cursor.callproc("SP_Cliente_Val", [ref_cursor,None,pemail])
+       
+        resultado = []
+        
+        for row in ref_cursor:
+            
+            resultado.append(row)
+            
+            if resultado[0][1]==pemail:
+                validar=True
+                break
+
+        if validar==None:
+            registro=True 
+            cursor.callproc('SP_Clientes_Update', [pnombre, papellidop, papellidom, pedad, psexo, pdireccion, pestadocivil, ptelefono, pemail, hash])
         connection.commit()  
         cursor.close()
         connection.close()
@@ -120,7 +148,20 @@ def reserva(request):
         connection = oracledb.connect(user="C##deptos", password="dbadmin23",
                                   encoding="UTF-8")
         
+        
 def eliminar_reserva(request):
     if request.method == "POST":
         connection = oracledb.connect(user="C##deptos", password="dbadmin23",
                                   encoding="UTF-8")
+        cursor = connection.cursor()
+        ref_cursor = connection.cursor()
+        cursor.callproc("SP_Arriendos_Eliminar", [ref_cursor,request.user.id])
+    
+        resultado=[]                  
+        for row in ref_cursor:
+            print(row)
+            resultado.append(row[1])
+        dat1=row[0]
+        correocancelacion(request.user.nombre,request.user.email)
+        cursor.callproc("SP_registros_mesas_d", dat1)
+        return redirect("clientes/welcome")

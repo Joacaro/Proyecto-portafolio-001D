@@ -7,18 +7,20 @@
     <form action="{% url 'editarclientes'%}"id="formulario" method="post" class=" text-center row">
         {% csrf_token %}
         <div class="col-sm-12 col-md-6">
+            <h1>Editar Perfil</h1>
+            <br>
             <h1>nombre</h1>
-            <input type="text" id="nombre" required minlength="2" style="width:95%" name="nombre" placeholder="Juan" pattern="[a-zA-Z]{3,50}" title="Colocar un nombre de 2 o mas caracteres de la 'a' a la 'z'">
+            <input type="text" id="nombre" required minlength="2" style="width:80%" name="nombre" placeholder="Juan" pattern="[a-zA-Z]{3,50}" title="Colocar un nombre de 2 o mas caracteres de la 'a' a la 'z'">
             <h1>apellido</h1>
-            <input type="text" id="apellido"required minlength="2" style="width:95%" name="apellido"placeholder="perez"  pattern="[a-zA-Z]{3,50}" title="Colocar un apellido de 2 o mas caracteres de la 'a' a la 'z'">
+            <input type="text" id="apellido"required minlength="2" style="width:80%" name="apellido"placeholder="perez"  pattern="[a-zA-Z]{3,50}" title="Colocar un apellido de 2 o mas caracteres de la 'a' a la 'z'">
             <h1>telefono</h1>
-            <input type="tel" id="telefono"required  style="width:95%" name="telefono"placeholder="956874265" pattern="[9,2]{1}[0-9]{3}[0-9]{2}[0-9]{3}" title="colocar solo 9 digitos que comience en 2 o 9">
+            <input type="tel" id="telefono"required  style="width:80%" name="telefono"placeholder="956874265" pattern="[9,2]{1}[0-9]{3}[0-9]{2}[0-9]{3}" title="colocar solo 9 digitos que comience en 2 o 9">
         </div>
         <div class="col-sm-12 col-md-6">
             <h1>Correo</h1>
-            <input type="email" id="email"required  style="width:95%" placeholder="email@email.com" name="email">
+            <input type="email" id="email"required  style="width:80%" placeholder="email@email.com" name="email">
             <h1>clave</h1>
-            <input type="password" id="clave"required minlength="6" style="width:95%" placeholder="******" name="clave" title="Colocar minimos 6 caracteres">
+            <input type="password" id="clave"required minlength="6" style="width:80%" placeholder="******" name="clave" title="Colocar minimos 6 caracteres">
         </div>
         <div class="center" style="margin: 20px 0;">
             <button type="submit" class="btn btn-danger">Editar</button>

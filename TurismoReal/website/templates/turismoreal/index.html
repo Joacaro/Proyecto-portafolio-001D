@@ -3,4 +3,36 @@
 
 {%block title %}Turismo Real{%endblock%}
 {%block content%}
+<div id="carouselExampleControls" class="carousel slide centrado" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item">
+        <img src="{%  static '/img/depto1.jpg' %} " class="imagen" alt="...">
+      </div>
+      <div class="carousel-item active">
+        <img src="{%  static '/img/depto2.jpg' %} "  class="imagen" alt="...">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+  <section >
+    <div class="container" style="margin: 20px auto ;">
+        <div class="row align-items-center justify-content-around flex-row-reverse">
+            <div class="col-lg-6">
+                <div>
+                    <h2 >Nuestra historia.</h3>                    
+                    <h5 style="font-family: 'Dancing Script' " >Turismo Real es una empresa familiar dedicada al arriendo de departamentos y otros servicios en zonas turisticas del país<br>
+                    Con diez años de experiencia, el trato gentil a los clientes, la ubicación y la calidad de los departamentos la ha hecho reconocida nacionalmente <br>
+                    Con Turismo Real puedes vivir una nueva experiencia en zonas turisticas y con departamentos acondicionados con alta calidad</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    </section>  
 {%endblock%}

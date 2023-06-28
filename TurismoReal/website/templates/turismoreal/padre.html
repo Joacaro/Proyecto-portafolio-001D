@@ -5,50 +5,61 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/headers/">
     <title>{%block title%}{%endblock%}</title>
     {% load static %}
+    <link href="{% static 'assets/dist/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{%  static 'css/header.css' %}" rel="stylesheet">
 </head>
-<body>
-    <nav top section class="navbar navbar-expand-lg" style="box-shadow: 6px 15px 20px Gainsboro">
-        <div class="container-fluid">
-          <a class="navbar-brand text-black text-center"  href="#"><i class="fa-solid fa-kitchen-set"></i></a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav mx-auto">
-              <li class="nav-item">
-                <a class="nav-link active text-black text-center " aria-current="page" href="{% url 'index' %}">Inicio</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle text-black text-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Servicios
-                </a>
-                <ul class="dropdown-menu">
-                  {% if user.is_authenticated %}
-                  <li><a class="dropdown-item text-center" href="{% url 'welcome' %}">Mi Cuenta</a></li>
-                  <li><a class="dropdown-item text-center" href="{% url 'salir' %}">Cerrar sesión</a></li>
-                  
-                  {% else %}  
-                  <li><a class="dropdown-item text-center" href="{% url 'login' %}">Login</a></li>
-                  {% endif %}
-                </ul>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-</body>
+<div class="container">
+  <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+    <div class="col-md-3 mb-2 mb-md-0">
+      <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
+        <svg class="bi" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
+      </a>
+    </div>
+
+    <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+      <li><a href="{% url 'index' %}" class="nav-link px-2 link-secondary">Inicio</a></li>
+      <li><a href="#" class="nav-link px-2">Precios</a></li>
+      <li><a href="#" class="nav-link px-2">Acerca de nosotros</a></li>
+      {% if user.is_authenticated %}
+      <li><a href="{% url 'editarclientes'%}" class="nav-link px-2">Editar perfil</a></li>
+      {% endif %}
+    </ul>
+    <div class="col-md-3 text-end">
+      {% if user.is_authenticated %}
+        <button type="button" class="btn btn-outline-primary me-2">
+          <a href="{% url 'salir' %}">Cerrar sesión</a>
+        </button>
+      {% else %}
+      <button type="button" class="btn btn-outline-primary me-2">
+        <a href="{% url 'login' %}">Iniciar Sesion</a>
+      </button>
+      <button type="button" class="btn btn-outline-secondary d-inline-flex align-items-center">
+        <a href="{% url 'crearcliente'%}">Registrarse</a>
+      </button>
+      {% endif %}
+    </div>
+  </header>
+</div>
 {%block content%}
 {%endblock%}
 
-<footer>
-    <footer class="bg-dark text-white pt-5 pb-4 down" >
-        <div class="container text-center text-md-left">
-          <div class=" text-center text-md-left row">
-            <div class="col-md-12 col-xl-3 mx-auto mt-3">
-              <h5 id="h5" class="text-uppercase mb-4 font-weight-bold ">Turismo Real</h5>
-              <p id="P">Empresa familiar</p>
-            </div>
-</footer>
+<div class="container">
+  <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+    <div class="col-md-4 d-flex align-items-center">
+      <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
+        <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"/></svg>
+      </a>
+      <span class="mb-3 mb-md-0 text-body-secondary">&copy; Turismo Real, 2023</span>
+    </div>
+
+    <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+      <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"/></svg></a></li>
+      <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"/></svg></a></li>
+      <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"/></svg></a></li>
+    </ul>
+  </footer>
+</div>
 </html>

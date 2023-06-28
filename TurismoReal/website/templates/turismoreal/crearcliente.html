@@ -3,11 +3,12 @@
 {% block title %}Crear Usuario{% endblock %}
 {% block content %}
 
-<div class="row text-white text-center col-sm-12 col-md-6 logine">
-    <form action="{% url 'crearcliente'%}" id="formulario" method="post" class="text-center-row">
+<div class="row text-black text-center login">
+    <form action="{% url 'crearcliente'%}" id="formulario" method="post" class="text-center">
         {%csrf_token%}
-        <div class="col-sm-12 col-md-6">
-            <h1>Seleccione Tipo de Identificación</h1>
+        <div class="col-sm-6 col-md-6">
+            <h1>Registro de Usuario</h1>
+            <br>
             <h1>Identificación</h1>
             <input type="text" id="rut" name="rut" required style="width:80%" placeholder="111111111" pattern="[1-9]{1}[0-9]{8}" title="Coloque el rut sin puntos ni - .Si termina en K remplace la con un '0'" >
             <h1>Nombre</h1>
@@ -20,7 +21,7 @@
             <input type="int" id="edad" required minlength="1" maxlength="2" style="width:80%" name="edad" placeholder="20" title="Colocar una edad de dos digitos">
             <h1>Sexo</h1>
             <select id="sexo" name="sexo" required>
-                <option selected="selected" disabled>Object in page</option>
+                <option selected="selected" disabled>Seleccione Sexo</option>
                 <option value='M'>Masculino</option>
                 <option value='F'>Femenino</option>
                 <option value='O'>Otro</option>
@@ -36,7 +37,7 @@
             <h1>Correo</h1>
             <input type="email" id="email"required  style="width:80%"placeholder="email@email.com" name="email">
             <h1>Clave</h1>
-            <input type="password" id="clave"required minlength="6" style="width:95%" placeholder="******"name="clave" title="Colocar minimos 6 caracteres">
+            <input type="password" id="clave"required minlength="6" style="width:80%" placeholder="******"name="clave" title="Colocar minimos 6 caracteres">
         </div>
         <button type="submit">Registrar</button>
     </form>
