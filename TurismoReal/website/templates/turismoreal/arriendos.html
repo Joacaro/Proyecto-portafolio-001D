@@ -1,0 +1,61 @@
+{%extends "turismoreal/padre.html"%}
+{% load static %}
+{% load widget_tweaks %}
+{% block title %}Arriendo{% endblock %}
+{% block content %}
+<div id="modal1" >
+  <div >
+    <div >
+      <div >
+        <h1 >Notificacion</h1>
+      </div>
+      <div class="modal-body">
+        {% if lala %}
+        <p>Reserva agendada. Se le enviara un correo con los datos de esta</p> 
+        {%endif%}
+        {% if tiene %}
+        <p>Usted ya tiene una reserva</p>
+        {%endif%}
+      </div>
+      <div >
+        <button class="btn btn-outline-primary" type="button" id="cerrar" onclick="cerrar()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="row text-black text-center login">
+      <form id="form" action="{% url 'reserva'%}" method="post" class=" text-center ">
+          {% csrf_token %}
+            <h4>Fecha</h4>
+            <input type="date" min="{{fecha}}" max="" required id="fecha" name="fecha" >
+            <H4>Hora</H4>
+            <input type="time" min="10:00" max="22:00" step="1800" required id="hora" name="hora" >
+            <h4>Personas</h4>
+            <input type="number" min="2" max="10"  required id="persona" name="persona" >
+            <div class="center" style="margin: 20px 0;">
+              <button type="submit" class="btn btn-danger" >Reservar</button>
+            </div>
+      </form>
+    </div>
+    {% if tiene %}
+    <script>
+      let modalTiene= document.getElementById("modal1");
+      modalTiene.style.display="block";
+      modalTiene.style.position= "absolute";
+      function cerrar(){
+        modalTiene.style.display="none";
+      }
+    </script>
+  {%endif%}  
+  {% if lala %}
+  <script>
+    let modalTiene= document.getElementById("modal1");
+    modalTiene.style.display="block";
+    modalTiene.style.position= "absolute";
+    function cerrar(){
+      modalTiene.style.display="none";
+    }
+  </script>
+{%endif%}    
+
+{% endblock %} 
