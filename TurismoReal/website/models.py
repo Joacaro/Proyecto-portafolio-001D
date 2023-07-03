@@ -26,3 +26,17 @@ class Cliente(models.Model):
     class Meta:
         managed=False
         db_table = 'Cliente'
+
+class Departamento(models.Model):
+    id_depto = models.IntegerField(primary_key=True, db_column="id_depto")
+    n_depto = models.IntegerField(db_column="n_depto")
+    cant_hab = models.IntegerField(db_column="cant_hab")
+    cant_ban = models.IntegerField(db_column="cant_ban")
+    disponibilidad = models.CharField(max_length=1, db_column="disponibilidad")
+    mantenimiento = models.CharField(max_length=1, db_column="mantenimiento")
+    direccion_ed_depto = models.CharField(max_length=50, db_column="direccion_ed_depto")
+    id_tipo_comp = models.IntegerField(db_column="id_tipo_comp")
+    id_inv = models.IntegerField(db_column="id_inv")
+    class Meta:
+        managed=False
+        db_table = 'Departamento'

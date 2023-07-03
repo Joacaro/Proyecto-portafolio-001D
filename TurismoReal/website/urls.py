@@ -11,4 +11,5 @@ urlpatterns = [
     path("editarclientes", views.editarcliente, name="editarclientes"),
     path('welcome',views.welcome , name="welcome"), 
     path('salir', views.salir, name="salir"),
+    path('carta', views.cartas, name="cartas"),
 ]

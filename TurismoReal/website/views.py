@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from .forms import loginform
 from django.db import connections
 import cx_Oracle as oracledb
@@ -10,12 +10,17 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from django.conf import settings
+from math import ceil
+from .models import Departamento
 mybackend = MyBackend()
 # Create your views here.
 def error_404(request, exception):
     return render(request, 'turismoreal/404.html')
 def index(request):
     return render(request, 'turismoreal/index.html')
+def cartas(request):
+    event_list = Departamento.objects.all()
+    return render(request, 'turismoreal/carta.html', {'event_list': event_list})
 def salir(request):
     logout(request)
     return redirect("login")
@@ -137,6 +142,29 @@ def login(request):
                 mensaje=True
             print(mensaje)
     return render(request, 'turismoreal/login.html', {"form": form, "mensaje":mensaje})
+
+def listarcartas(request):
+    connection = oracledb.connect(user="c##deptos", password="dbadmin23", encoding="UTF-8")
+    pagina=1
+    try:
+        pagina=int(request.GET["pagina"])
+    except:
+        pagina=1
+    cursor = connection.cursor()
+    salto=(pagina-1)*8
+    tomar=salto+8
+    ref_cursor = connection.cursor()
+    cursor.callproc("SP_Dept_List", [ref_cursor])
+    resultado = {"cartas": []}
+    for row in ref_cursor:
+        resultado["cartas"].append(row)
+    total=len(resultado["cartas"])
+    total=ceil(total/8)
+
+    resultado1 = {"cartas": []}
+    resultado1["cartas"]=resultado["cartas"][salto:tomar]
+    resultado1["total"]=total
+    return JsonResponse(resultado1, safe=False)
 
 @login_required(login_url="login")
 def welcome(request):

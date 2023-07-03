@@ -1,0 +1,32 @@
+{%extends "turismoreal/padre.html"%}
+{% load static %}
+{% block title %}carta{% endblock %}
+{% block content %}
+<div class="title" style="margin: 20px auto ;">
+    <h1>Nuestros Departamentos</h1>
+</div>
+<div class="container" style="margin: 20px auto ; padding-left: 50px; left: 50%; right: 50%;"></div>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3"></div>
+{% for event in event_list %}
+        <div class="col">
+          <div class="card shadow-sm">
+            <img src="{% static '/img/ed' %}{{ event.id_depto }}.jpg" width="40%" height="225">
+            <div class="card-body">
+              <p class="card-text">{{ event.direccion_ed_depto }}</p>
+              <p>Numero de departamento: </p>
+              <p class="card-text">{{ event.n_depto }}</p>
+              <p>Cantidad de habitaciones: </p>
+              <p class="card-text">{{ event.n_depto }}</p>
+              <p>Cantidad de baños: </p>
+              <p class="card-text">{{ event.cant_ban}}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Arrendar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+{% endfor %}
+</div>
+</div> 
+{% endblock %} 

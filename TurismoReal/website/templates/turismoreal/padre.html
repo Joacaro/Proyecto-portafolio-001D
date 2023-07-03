@@ -21,7 +21,7 @@
 
     <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
       <li><a href="{% url 'index' %}" class="nav-link px-2 link-secondary">Inicio</a></li>
-      <li><a href="#" class="nav-link px-2">Precios</a></li>
+      <li><a href="{% url 'cartas' %}" class="nav-link px-2">Precios</a></li>
       <li><a href="#" class="nav-link px-2">Acerca de nosotros</a></li>
       {% if user.is_authenticated %}
       <li><a href="{% url 'editarclientes'%}" class="nav-link px-2">Editar perfil</a></li>
