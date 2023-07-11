@@ -12,4 +12,5 @@ urlpatterns = [
     path('welcome',views.welcome , name="welcome"), 
     path('salir', views.salir, name="salir"),
     path('carta', views.cartas, name="cartas"),
+    path('detalle/<id_depto>/', views.hotel_detail, name="detalle")
 ]

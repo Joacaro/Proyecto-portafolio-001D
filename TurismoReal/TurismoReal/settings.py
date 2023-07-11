@@ -122,7 +122,7 @@ EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'turismoreal.la@gmail.com'
-EMAIL_HOST_PASSWORD = 'zoqtrpqhcelmxbvp'
+EMAIL_HOST_PASSWORD = 'A!p03T.s'
 EMAIL_PORT = 587
 
 # Static files (CSS, JavaScript, Images)

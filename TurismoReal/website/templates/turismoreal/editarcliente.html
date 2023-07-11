@@ -10,7 +10,7 @@
             <h1>Editar Perfil</h1>
             <br>
             <h1>nombre</h1>
-            <input type="text" id="nombre" required minlength="2" style="width:80%" name="nombre" placeholder="Juan" pattern="[a-zA-Z]{3,50}" title="Colocar un nombre de 2 o mas caracteres de la 'a' a la 'z'">
+            <input type="text" id="nombre" required minlength="2" style="width:80%" name="nombre" placeholder="Juan" pattern="[a-zA-Z]{3,50}" title="Colocar un nombre de 2 o mas caracteres de la 'a' a la 'z'" default="{{ user.name }}">
             <h1>apellido</h1>
             <input type="text" id="apellido"required minlength="2" style="width:80%" name="apellido"placeholder="perez"  pattern="[a-zA-Z]{3,50}" title="Colocar un apellido de 2 o mas caracteres de la 'a' a la 'z'">
             <h1>telefono</h1>

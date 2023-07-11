@@ -34,9 +34,20 @@ class Departamento(models.Model):
     cant_ban = models.IntegerField(db_column="cant_ban")
     disponibilidad = models.CharField(max_length=1, db_column="disponibilidad")
     mantenimiento = models.CharField(max_length=1, db_column="mantenimiento")
+    valor = models.IntegerField(db_column="valor")
     direccion_ed_depto = models.CharField(max_length=50, db_column="direccion_ed_depto")
     id_tipo_comp = models.IntegerField(db_column="id_tipo_comp")
     id_inv = models.IntegerField(db_column="id_inv")
     class Meta:
         managed=False
         db_table = 'Departamento'
+
+class Arriendo(models.Model):
+    id_arriendo = models.IntegerField(primary_key=True, db_column="id_arriendo")
+    fecha_inicio = models.DateField(db_column="fecha_inicio")
+    fecha_fin = models.DateField(db_column="fecha_fin")
+    ed_direccion_ed = models.CharField(max_length=50,db_column="ed_direccion_ed")
+    cliente_id_cli = models.IntegerField(db_column="Cliente_id_cli")
+    class Meta:
+        managed=False
+        db_table = "Arriendos"

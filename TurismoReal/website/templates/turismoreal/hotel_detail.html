@@ -1,0 +1,54 @@
+{% extends "turismoreal/padre.html" %}
+{% load static %}
+{%  block content %}
+<div class="container mt-5 pt-5">
+    <div class="row search-card-result">                    
+        <div class="col-md-3">
+        <a href="/detalle/{{event.id_depto}}">
+            <img class="img-fluid" src="{% static '/img/ed' %}{{ event_list.id_depto }}.jpg" alt="Card image cap">
+        </a></div>
+        <div class="col-md-5">
+            <h5>{{event_list.direccion_ed_depto}}</h5>
+            <p>{{event_list.direccion_ed_depto}}</p>
+        </div>
+        <div class="col-md-2 border-left text-center more-offers">                        
+            <p>Precio</p>
+            <p>${{event_list.valor}} por noche</p>
+            <p>Cantidad de habitaciones</p>
+            <p>{{event_list.cant_hab}}</p>
+            <p>Cantidad de baños</p>
+            <p>{{event_list.cant_ban}}</p>
+    </div>
+    {% if request.user.is_authenticated %}
+    <div class="filter-card">
+        <h5>Agenda tu reserva</h5>
+        {%include "turismoreal/messages.html"%}
+        <form method="post">
+            {% csrf_token %}
+            <div class="row form-group">
+                <div class="col-md-12">
+                    <label for="mintopay">Inicio de reserva</label>
+                    <p>
+                        <input type="date" name="checkin" id="checkin" class="form-control">
+                    </p>
+                </div>
+                <div class="col-md-12">
+                    <label for="maxtopay">Fin de reserva</label>
+                    <p>
+                        <input type="date" name="checkout" id="checkout" class="form-control">
+                    </p>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-md-12">
+                    <input type="submit" class="btn btn-primary btn-block" value="Book">
+                </div>
+            </div>
+        </form>
+    </div>
+    {% else %}
+    <a href="{% url 'login' %}" class="btn btn-primary mt-5 ">Login</a>
+    {% endif %}
+</div>
+
+{% endblock %}

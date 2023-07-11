@@ -1,32 +1,33 @@
 {%extends "turismoreal/padre.html"%}
 {% load static %}
-{% block title %}carta{% endblock %}
+{% block title %}Carta{% endblock %}
 {% block content %}
 <div class="title" style="margin: 20px auto ;">
     <h1>Nuestros Departamentos</h1>
 </div>
 <div class="container" style="margin: 20px auto ; padding-left: 50px; left: 50%; right: 50%;"></div>
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3"></div>
-{% for event in event_list %}
-        <div class="col">
-          <div class="card shadow-sm">
-            <img src="{% static '/img/ed' %}{{ event.id_depto }}.jpg" width="40%" height="225">
-            <div class="card-body">
-              <p class="card-text">{{ event.direccion_ed_depto }}</p>
-              <p>Numero de departamento: </p>
-              <p class="card-text">{{ event.n_depto }}</p>
-              <p>Cantidad de habitaciones: </p>
-              <p class="card-text">{{ event.n_depto }}</p>
-              <p>Cantidad de baños: </p>
-              <p class="card-text">{{ event.cant_ban}}</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Arrendar</button>
+    <div class="col-lg-9  px-4 mb-5">
+      {% for event in event_list %}
+                <div class="row search-card-result">
+                    <div class="col-md-3">
+                    <a href="/detalle/{{ event.id_depto }}">
+                        <img class="img-fluid" src="{% static '/img/ed' %}{{ event.id_depto }}.jpg" alt="Card image cap">
+                    </a></div>               
+                    <div class="col-md-5">
+                        <h5>{{event.direccion_ed_depto}}</h5>
+                        <p>{{event.direccion_ed_depto}}</p>
+                    </div>
+                    <div class="col-md-2 border-left text-center more-offers">                        
+                        <p>Precio</p>
+                        <p>${{event.valor}} por noche</p>
+                        <p>Cantidad de habitaciones</p>
+                        <p>{{event.cant_hab}}</p>
+                        <p>Cantidad de baños</p>
+                        <p>{{event.cant_ban}}</p>
+                    </div>
                 </div>
-              </div>
-            </div>
-          </div>
-{% endfor %}
-</div>
+                {% endfor %}
+    </div>
+  </div>
 </div> 
 {% endblock %} 

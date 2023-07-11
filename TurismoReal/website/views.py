@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse,HttpResponseRedirect
+from django.contrib import messages
 from .forms import loginform
 from django.db import connections
 import cx_Oracle as oracledb
@@ -13,6 +14,7 @@ from django.conf import settings
 from math import ceil
 from .models import Departamento
 mybackend = MyBackend()
+
 # Create your views here.
 def error_404(request, exception):
     return render(request, 'turismoreal/404.html')
@@ -175,7 +177,10 @@ def reserva(request):
     if request.method == "POST":
         connection = oracledb.connect(user="C##deptos", password="dbadmin23",
                                   encoding="UTF-8")
-        
+        datos = request.POST
+        fechainicio = datos["fechaini"]
+        fechafin = datos["fechafin"]
+    return render(request, 'turismoreal/arriendos.html')
         
 def eliminar_reserva(request):
     if request.method == "POST":
@@ -193,3 +198,14 @@ def eliminar_reserva(request):
         correocancelacion(request.user.nombre,request.user.email)
         cursor.callproc("SP_registros_mesas_d", dat1)
         return redirect("clientes/welcome")
+
+def hotel_detail(request,id_depto):
+    dept_list = Departamento.objects.get(id_depto = id_depto)
+    if request.method == 'POST':
+        checkin = request.POST.get('checkin')
+        checkout= request.POST.get('checkout')   
+        messages.success(request, 'Your booking has been saved')
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    return render(request , 'turismoreal/hotel_detail.html' ,{
+        'event_list' : dept_list
+    })
