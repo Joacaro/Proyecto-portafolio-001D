@@ -12,7 +12,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from django.conf import settings
 from math import ceil
-from .models import Departamento
+from .models import Departamento, Arriendo
 mybackend = MyBackend()
 
 # Create your views here.
@@ -145,42 +145,9 @@ def login(request):
             print(mensaje)
     return render(request, 'turismoreal/login.html', {"form": form, "mensaje":mensaje})
 
-def listarcartas(request):
-    connection = oracledb.connect(user="c##deptos", password="dbadmin23", encoding="UTF-8")
-    pagina=1
-    try:
-        pagina=int(request.GET["pagina"])
-    except:
-        pagina=1
-    cursor = connection.cursor()
-    salto=(pagina-1)*8
-    tomar=salto+8
-    ref_cursor = connection.cursor()
-    cursor.callproc("SP_Dept_List", [ref_cursor])
-    resultado = {"cartas": []}
-    for row in ref_cursor:
-        resultado["cartas"].append(row)
-    total=len(resultado["cartas"])
-    total=ceil(total/8)
-
-    resultado1 = {"cartas": []}
-    resultado1["cartas"]=resultado["cartas"][salto:tomar]
-    resultado1["total"]=total
-    return JsonResponse(resultado1, safe=False)
-
 @login_required(login_url="login")
 def welcome(request):
     return render(request, 'turismoreal/welcome.html')
-
-@login_required(login_url="login")
-def reserva(request):
-    if request.method == "POST":
-        connection = oracledb.connect(user="C##deptos", password="dbadmin23",
-                                  encoding="UTF-8")
-        datos = request.POST
-        fechainicio = datos["fechaini"]
-        fechafin = datos["fechafin"]
-    return render(request, 'turismoreal/arriendos.html')
         
 def eliminar_reserva(request):
     if request.method == "POST":
@@ -200,11 +167,17 @@ def eliminar_reserva(request):
         return redirect("clientes/welcome")
 
 def hotel_detail(request,id_depto):
+    
     dept_list = Departamento.objects.get(id_depto = id_depto)
     if request.method == 'POST':
+        connection = oracledb.connect(user="C##deptos", password="dbadmin23",
+                                  encoding="UTF-8")
+        cursor = connection.cursor()
+        ref_cursor = connection.cursor()
         checkin = request.POST.get('checkin')
-        checkout= request.POST.get('checkout')   
-        messages.success(request, 'Your booking has been saved')
+        checkout= request.POST.get('checkout')  
+        depto = Departamento.objects.get(id_depto = id_depto) 
+        messages.success(request, 'Tu reserva ha sido realizada')
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     return render(request , 'turismoreal/hotel_detail.html' ,{
         'event_list' : dept_list

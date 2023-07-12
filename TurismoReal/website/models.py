@@ -47,7 +47,7 @@ class Arriendo(models.Model):
     fecha_inicio = models.DateField(db_column="fecha_inicio")
     fecha_fin = models.DateField(db_column="fecha_fin")
     ed_direccion_ed = models.CharField(max_length=50,db_column="ed_direccion_ed")
-    cliente_id_cli = models.IntegerField(db_column="Cliente_id_cli")
+    cliente_id_cli = models.ForeignKey(Cliente, db_column="Cliente_id_cli",on_delete=models.CASCADE)
     class Meta:
         managed=False
         db_table = "Arriendos"

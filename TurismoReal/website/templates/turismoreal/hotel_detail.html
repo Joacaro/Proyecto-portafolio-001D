@@ -18,6 +18,11 @@
             <p>{{event_list.cant_hab}}</p>
             <p>Cantidad de baños</p>
             <p>{{event_list.cant_ban}}</p>
+            {% if event.disponibilidad != 0 %}
+            <h1>Disponible</h1>
+            {% else %}
+            <h1>No Disponible</h1>
+            {% endif %}
     </div>
     {% if request.user.is_authenticated %}
     <div class="filter-card">
